@@ -8,22 +8,26 @@ type Slot struct {
 	free    bool
 }
 
-func (s *Slot) isFree() bool {
+func (s *Slot) IsFree() bool {
 	return (*s).free
 }
 
-func (s *Slot) setFree(isFree bool) {
+func (s *Slot) SetFree(isFree bool) {
 	(*s).free = isFree
 }
 
-func (s *Slot) getNumber() int {
+func (s *Slot) SetNumber(num int) {
+	(*s).number = num
+}
+
+func (s *Slot) GetNumber() int {
 	return (*s).number
 }
 
-func (s *Slot) getVehicle() vehicle.Vehicle {
+func (s *Slot) GetVehicle() vehicle.Vehicle {
 	return (*s).vehicle
 }
 
-func (s *Slot) setVehicle(v vehicle.Vehicle) {
+func (s *Slot) SetVehicle(v vehicle.Vehicle) {
 	(*s).vehicle = v
 }
