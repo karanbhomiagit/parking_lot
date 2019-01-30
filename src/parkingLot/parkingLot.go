@@ -44,7 +44,7 @@ func (p *ParkingLot) Park(v vehicle.Vehicle) (int, error) {
 			return i + 1, nil
 		}
 	}
-	return -1, errors.New("No free slots found")
+	return -1, errors.New("Sorry, parking lot is full")
 }
 
 func (p *ParkingLot) Leave(slotNum int) error {
@@ -56,4 +56,33 @@ func (p *ParkingLot) Leave(slotNum int) error {
 	}
 	(*p)[slotNum-1].SetFree(true)
 	return nil
+}
+
+func (p *ParkingLot) GetSlotNumbersByColor(color string) []int {
+	slotNumbers := []int{}
+	for _, slot := range *p {
+		if slot.IsFree() == false && slot.GetVehicle().GetColor() == color {
+			slotNumbers = append(slotNumbers, slot.GetNumber()+1)
+		}
+	}
+	return slotNumbers
+}
+
+func (p *ParkingLot) GetRegNumbersByColor(color string) []string {
+	regNumbers := []string{}
+	for _, slot := range *p {
+		if slot.IsFree() == false && slot.GetVehicle().GetColor() == color {
+			regNumbers = append(regNumbers, slot.GetVehicle().GetRegistrationNumber())
+		}
+	}
+	return regNumbers
+}
+
+func (p *ParkingLot) GetSlotNumberByRegNum(regNum string) (int, error) {
+	for _, slot := range *p {
+		if slot.IsFree() == false && slot.GetVehicle().GetRegistrationNumber() == regNum {
+			return slot.GetNumber(), nil
+		}
+	}
+	return -1, errors.New("Not found")
 }
