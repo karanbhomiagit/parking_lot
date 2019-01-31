@@ -2,3 +2,10 @@
 # Complete bin/setup so that after it is
 # run, bin/parking_lot can be used to launch
 # it.
+
+if [ "$#" -eq 0 ];
+then
+    cd src && go run main.go
+else
+    cd src && go run main.go $1
+fi

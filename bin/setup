@@ -5,3 +5,7 @@
 #
 # After this is run, bin/parking_lot
 # should Just Work.
+
+go build src/main.go
+
+cd src/parkingLot && go test

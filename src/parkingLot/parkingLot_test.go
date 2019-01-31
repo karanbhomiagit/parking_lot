@@ -39,7 +39,7 @@ func TestPark(t *testing.T) {
 		assert.Equal(res, 2)
 		res, err = p.Park(*v)
 		assert.Equal(res, -1)
-		assert.Equal(err.Error(), "No free slots found")
+		assert.Equal(err.Error(), "Sorry, parking lot is full")
 	})
 
 	t.Run("Successfully park in first empty slot", func(t *testing.T) {
@@ -193,7 +193,7 @@ func TestGetSlotNumberByRegNum(t *testing.T) {
 		assert := assert.New(t)
 		num, err := p.GetSlotNumberByRegNum("929292")
 		assert.Nil(err)
-		assert.Equal(num, 5)
+		assert.Equal(num, 6)
 	})
 
 	t.Run("Successfully get error for an absent reg num", func(t *testing.T) {

@@ -15,7 +15,7 @@ func NewParkingLot(numberOfSlots int) ParkingLot {
 	}
 	slots := make([]slot.Slot, numberOfSlots)
 	for i, slot := range slots {
-		(&slot).SetNumber(i)
+		(&slot).SetNumber(i + 1)
 		(&slot).SetFree(true)
 		slots[i] = slot
 	}
@@ -41,7 +41,7 @@ func (p *ParkingLot) Park(v vehicle.Vehicle) (int, error) {
 			(&slot).SetVehicle(v)
 			(&slot).SetFree(false)
 			(*p)[i] = slot
-			return i + 1, nil
+			return (&slot).GetNumber(), nil
 		}
 	}
 	return -1, errors.New("Sorry, parking lot is full")
@@ -62,7 +62,7 @@ func (p *ParkingLot) GetSlotNumbersByColor(color string) []int {
 	slotNumbers := []int{}
 	for _, slot := range *p {
 		if slot.IsFree() == false && slot.GetVehicle().GetColor() == color {
-			slotNumbers = append(slotNumbers, slot.GetNumber()+1)
+			slotNumbers = append(slotNumbers, slot.GetNumber())
 		}
 	}
 	return slotNumbers
